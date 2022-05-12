@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 const CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' )
 const TerserPlugin = require("terser-webpack-plugin");
 
-const PROD = false
+const PROD = true
 
 module.exports = {
   //watch: true,
