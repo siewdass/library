@@ -1,1 +1,0 @@
-let VARIABLE: string = 'Hello World'
