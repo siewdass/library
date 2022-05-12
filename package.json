@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack",
+    "commit": "git add . && git commit -m '-'",
+    "push": "git push"
   },
   "author": "",
   "license": "ISC",
