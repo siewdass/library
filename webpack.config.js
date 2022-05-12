@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 const CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' )
 const TerserPlugin = require("terser-webpack-plugin");
 
-const PROD = true
+const PROD = false
 
 module.exports = {
   //watch: true,
@@ -13,7 +13,7 @@ module.exports = {
     new HtmlWebpackPlugin( {
       template: path.join( __dirname, 'src/index.pug' ),
       filename: 'index.html',
-      minify: PROD,
+      minify: PROD, // HTML MINIFY
       inject: 'body'
     } ),
     new MiniCssExtractPlugin( {
@@ -32,7 +32,7 @@ module.exports = {
   },
   optimization: {
     minimizer: [ new TerserPlugin(), new CssMinimizerPlugin( ) ],
-    minimize: PROD
+    minimize: PROD // JS & CSS MINIFY
   },
   module: {
     rules: [
