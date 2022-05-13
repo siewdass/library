@@ -55,7 +55,10 @@ module.exports = {
     extensions: [ '.ts' ], // IMPORTS
   },
   optimization: {
-    minimizer: [ new TerserPlugin( ), new CssMinimizerPlugin( ) ],
+    minimizer: [
+      new TerserPlugin( ),
+      new CssMinimizerPlugin( )
+    ],
     minimize: false // JS & CSS MINIFY
   },
   module: {
