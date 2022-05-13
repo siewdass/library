@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack",
-    "prod": "NODE_ENV=production webpack",
+    "dev": "webpack --config webpack.dev.js",
+    "prod": "webpack --config webpack.dev.js",
     "serve": "http-server ./dist --port 3000 --silent --proxy http://localhost:3000?",
     "pull": "git pull",
     "commit": "git add . && git commit -m '-'",

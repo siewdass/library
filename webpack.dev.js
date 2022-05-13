@@ -11,12 +11,17 @@ const MODE = process.env.NODE_ENV
 
 module.exports = {
   watch: false,
-  mode: MODE,
+  mode: 'development',
   plugins: [
     new HtmlWebpackPlugin( {
       template: path.join( __dirname, './src/index.pug' ),
       filename: 'index.html',
-      minify: MODE == 'production' ? true : false, // HTML MINIFY
+      //minify: MODE == 'production' ? true : false, // HTML MINIFY
+      minify: {
+        removeComments: true,
+        //removeEmptyElements: false,
+        //collapseWhitespace: true // minify HTML
+      },
       inject: 'body',
       meta: {
         format: { 
@@ -27,25 +32,17 @@ module.exports = {
           content: 'width=device-width, initial-scale=1.0'
         }
       },
-      //favicon: 'src/assets/favicon.ico'
     } ),
     new MiniCssExtractPlugin( {
       filename: 'style.css'
     } ),
-    new CopyPlugin({
-      patterns: [
-        { from: "src/assets", to: "assets" },
-      ],
-    }),
-    new HtmlWebpackTagsPlugin( {
-      links: [
-        {
-          path: 'assets/favicon.ico',
-          attributes: { rel: 'icon' }
-        },
-      ],
+    new CopyPlugin( {
+      patterns: [ { from: "src/assets", to: "assets" } ]
     } ),
-    new BeautifyHtmlWebpackPlugin( )
+    new HtmlWebpackTagsPlugin( {
+      links: [ { path: 'assets/favicon.ico', attributes: { rel: 'icon' } } ]
+    } ),
+    new BeautifyHtmlWebpackPlugin( { 'preserve_newlines': false, "indent_empty_lines": false } ),
   ],
   entry: {
     App: [ './src/main.ts', './src/style.less' ],
@@ -55,11 +52,11 @@ module.exports = {
     filename: 'main.js'
   },
   resolve: {
-    extensions: [ '.ts' ],
+    extensions: [ '.ts' ], // IMPORTS
   },
   optimization: {
     minimizer: [ new TerserPlugin( ), new CssMinimizerPlugin( ) ],
-    minimize: MODE == 'production' ? true : false // JS & CSS MINIFY
+    minimize: false // JS & CSS MINIFY
   },
   module: {
     rules: [
@@ -67,17 +64,14 @@ module.exports = {
         test: /\.pug$/,
         loader: 'pug-loader',
         options: { pretty: true },
-        //exclude: path.resolve(__dirname, 'node_modules' ),
       },
       {
         test: /\.less$/,
         use: [ MiniCssExtractPlugin.loader, 'css-loader', 'less-loader' ],
-        //exclude: path.resolve( __dirname, 'node_modules' ),
       },
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        //exclude: path.resolve( __dirname,'node_modules' ),
       }
     ]
   }
