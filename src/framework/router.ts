@@ -18,9 +18,3 @@ export class Router {
   }
 
 }
-
-declare global {
-  interface Window {
-    router: Router
-  }
-}

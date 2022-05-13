@@ -6,4 +6,6 @@ const paths = {
   contact: { path: '/contact', template: '<h1>Contact</h1>' }
 }
 
-window.router = new Router( paths )
+global.router = new Router( paths )
+
+//window.router = new Router( paths )
