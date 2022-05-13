@@ -4,16 +4,16 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 const CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' )
 const TerserPlugin = require("terser-webpack-plugin");
 
-const PROD = true
+const MODE = process.env.NODE_ENV
 
 module.exports = {
   //watch: true,
-  mode: PROD == true ? 'production' : 'development',
+  mode: MODE,
   plugins: [
     new HtmlWebpackPlugin( {
       template: path.join( __dirname, 'src/index.pug' ),
       filename: 'index.html',
-      minify: PROD, // HTML MINIFY
+      minify: MODE == 'production' ? true : false, // HTML MINIFY
       inject: 'body'
     } ),
     new MiniCssExtractPlugin( {
@@ -28,29 +28,29 @@ module.exports = {
     filename: 'main.js'
   },
   resolve: {
-    //extensions: [ '.ts' ],
+    extensions: [ '.ts' ],
   },
   optimization: {
-    minimizer: [ new TerserPlugin(), new CssMinimizerPlugin( ) ],
-    minimize: PROD // JS & CSS MINIFY
+    minimizer: [ new TerserPlugin( ), new CssMinimizerPlugin( ) ],
+    minimize: MODE == 'production' ? true : false // JS & CSS MINIFY
   },
   module: {
     rules: [
       {
         test: /\.pug$/,
         loader: 'pug-loader',
-        exclude: path.resolve(__dirname, 'node_modules' ),
         options: { pretty: true },
+        //exclude: path.resolve(__dirname, 'node_modules' ),
       },
       {
         test: /\.less$/,
         use: [ MiniCssExtractPlugin.loader, 'css-loader', 'less-loader' ],
-        exclude: path.resolve( __dirname, 'node_modules' ),
+        //exclude: path.resolve( __dirname, 'node_modules' ),
       },
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        exclude: path.resolve( __dirname,'node_modules' ),
+        //exclude: path.resolve( __dirname,'node_modules' ),
       }
     ]
   }

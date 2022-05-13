@@ -6,6 +6,11 @@ html
     meta( name='viewport', content='width=device-width, initial-scale=1.0' )
     title Webpack with Pug, Less and TypeScript!
   body
-    h2#header
-    button#alertBtn Click me!
-    button( (click)="func()", [if]="condition" ) {variable}
+    header
+      button#Home( onclick="window.router.load('home')" ) Home 
+      button#About( onclick="window.router.load('about')" ) About
+      button#Contact( onclick="window.router.load('contact')" ) Contact
+    //h2#header
+    //button#alertBtn Click me!
+    //button( (click)="func()", [if]="condition" ) {variable}
+    router
