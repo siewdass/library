@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 const CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' )
 const TerserPlugin = require( 'terser-webpack-plugin' )
 const CopyPlugin = require( 'copy-webpack-plugin' )
-var HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+const BeautifyHtmlWebpackPlugin = require('beautify-html-webpack-plugin');
 
 const MODE = process.env.NODE_ENV
 
@@ -17,6 +18,15 @@ module.exports = {
       filename: 'index.html',
       minify: MODE == 'production' ? true : false, // HTML MINIFY
       inject: 'body',
+      meta: {
+        format: { 
+          charset: 'UTF-8',
+        },
+        responsive: { 
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1.0'
+        }
+      },
       //favicon: 'src/assets/favicon.ico'
     } ),
     new MiniCssExtractPlugin( {
@@ -28,12 +38,14 @@ module.exports = {
       ],
     }),
     new HtmlWebpackTagsPlugin( {
-      links: [ {
-        path: 'assets/favicon.ico',
-        href: '',
-        attributes: { rel: 'icon' }
-      } ],
-    } )
+      links: [
+        {
+          path: 'assets/favicon.ico',
+          attributes: { rel: 'icon' }
+        },
+      ],
+    } ),
+    new BeautifyHtmlWebpackPlugin( )
   ],
   entry: {
     App: [ './src/main.ts', './src/style.less' ],
