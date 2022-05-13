@@ -2,23 +2,38 @@ const path = require( 'path' )
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 const CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' )
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require( 'terser-webpack-plugin' )
+const CopyPlugin = require( 'copy-webpack-plugin' )
+var HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 const MODE = process.env.NODE_ENV
 
 module.exports = {
-  //watch: true,
+  watch: false,
   mode: MODE,
   plugins: [
     new HtmlWebpackPlugin( {
-      template: path.join( __dirname, 'src/index.pug' ),
+      template: path.join( __dirname, './src/index.pug' ),
       filename: 'index.html',
       minify: MODE == 'production' ? true : false, // HTML MINIFY
-      inject: 'body'
+      inject: 'body',
+      //favicon: 'src/assets/favicon.ico'
     } ),
     new MiniCssExtractPlugin( {
       filename: 'style.css'
     } ),
+    new CopyPlugin({
+      patterns: [
+        { from: "src/assets", to: "dist" },
+      ],
+    }),
+    new HtmlWebpackTagsPlugin( {
+      links: [ {
+        path: 'assets/favicon.ico',
+        href: '',
+        attributes: { rel: 'icon' }
+      } ],
+    } )
   ],
   entry: {
     App: [ './src/main.ts', './src/style.less' ],

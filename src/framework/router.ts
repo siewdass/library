@@ -9,9 +9,14 @@ export class Router {
   load( page: string = 'home' ) {
     const { paths } = this
     const { path, template } = paths[ page ]
-    //console.log( path, template )
     const container = document.querySelector( 'router' )
     container.innerHTML = template
     window.history.pushState( { }, '', path )
+  }
+}
+
+declare global {
+  interface Window {
+    router: Router
   }
 }

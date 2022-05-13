@@ -1,7 +1,5 @@
 import { Router } from './framework/router'
 
-//const element: HTMLElement = document.querySelector( '#router' )
-
 const paths = {
   home: {
     path: "/",
@@ -14,12 +12,6 @@ const paths = {
   contact: {
     path: "/contact",
     template: `<h1>Contact</h1>`,
-  }
-}
-
-declare global {
-  interface Window {
-    router: Router
   }
 }
 
