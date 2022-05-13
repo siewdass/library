@@ -1,6 +1,6 @@
 export class Router {
-  
-  paths: Object
+
+  paths: object
 
   constructor( paths  ) {
     this.paths = paths
