@@ -3,5 +3,6 @@ export function Component( arg: any ) {
     target.prototype.template = arg.template
     target.prototype.style = arg.style
     target.prototype.pug = require( '../app/app.pug' )( )
+    console.log( 'classProperties:', Object.getOwnPropertyNames( target.prototype ) )
   }
 }
