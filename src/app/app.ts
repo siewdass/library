@@ -2,7 +2,7 @@ import { Component } from '../framework/component'
 
 @Component( { template: '<p>Home</p>', style: 'app.less' } )
 export class Home {
-  myvar = 'h'
+  myvar = 'Hello World'
   constructor( ) {
     console.log( this )
   }
