@@ -4,10 +4,9 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 const CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' )
 const TerserPlugin = require( 'terser-webpack-plugin' )
 const CopyPlugin = require( 'copy-webpack-plugin' )
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
-const BeautifyHtmlWebpackPlugin = require('beautify-html-webpack-plugin');
-
-const MODE = process.env.NODE_ENV
+const HtmlWebpackTagsPlugin = require( 'html-webpack-tags-plugin' )
+const BeautifyHtmlWebpackPlugin = require( 'beautify-html-webpack-plugin' )
+const HtmlBeautifyPlugin = require( 'html-beautify-webpack-plugin' )
 
 module.exports = {
   watch: false,
@@ -15,7 +14,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin( {
       template: path.join( __dirname, './src/index.pug' ),
-      filename: 'index.html',
+      filename: 'index.html', // HTML OUTPUT 
       //minify: MODE == 'production' ? true : false, // HTML MINIFY
       minify: {
         removeComments: true,
@@ -23,18 +22,13 @@ module.exports = {
         //collapseWhitespace: true // minify HTML
       },
       inject: 'body',
-      meta: {
-        format: { 
-          charset: 'UTF-8',
-        },
-        responsive: { 
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1.0'
-        }
-      },
+      meta: [
+        { charset: 'UTF-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+      ]
     } ),
     new MiniCssExtractPlugin( {
-      filename: 'style.css'
+      filename: 'style.css' // CSS OUTPUT
     } ),
     new CopyPlugin( {
       patterns: [ { from: "src/assets", to: "assets" } ]
@@ -42,17 +36,20 @@ module.exports = {
     new HtmlWebpackTagsPlugin( {
       links: [ { path: 'assets/favicon.ico', attributes: { rel: 'icon' } } ]
     } ),
-    new BeautifyHtmlWebpackPlugin( { 'preserve_newlines': false, "indent_empty_lines": false } ),
+    //new HtmlBeautifyPlugin( { } ) 
+    //new BeautifyHtmlWebpackPlugin( { 'preserve_newlines': false } ),
   ],
   entry: {
     App: [ './src/main.ts', './src/style.less' ],
   },
   output: {
     path: path.resolve( __dirname, './dist' ),
-    filename: 'main.js'
+    filename: 'main.js' // JS OUTPUT
   },
   resolve: {
-    extensions: [ '.ts' ], // IMPORTS
+    extensions: [ '.ts', '.js' ], // IMPORTS
+    //fallback: { "path": require.resolve("path-browserify") }
+    //fallback: { "fs": false, "os": false },
   },
   optimization: {
     minimizer: [
@@ -65,7 +62,7 @@ module.exports = {
     rules: [
       {
         test: /\.pug$/,
-        loader: 'pug-loader',
+        loader: 'simple-pug-loader',
         options: { pretty: true },
       },
       {

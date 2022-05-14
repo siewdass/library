@@ -1,11 +1,7 @@
-export function Template( file: string ) {
+export function Component( arg: any ) {
   return function( target: Function ) {
-    target.prototype.template = file
-  }
-}
-
-export function Style( file: string ) {
-  return function( target: Function ) {
-    target.prototype.style = file
+    target.prototype.template = arg.template
+    target.prototype.style = arg.style
+    target.prototype.pug = require( '../app/app.pug' )( )
   }
 }

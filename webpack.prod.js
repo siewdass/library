@@ -7,21 +7,14 @@ const CopyPlugin = require( 'copy-webpack-plugin' )
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const BeautifyHtmlWebpackPlugin = require('beautify-html-webpack-plugin');
 
-const MODE = process.env.NODE_ENV
-
 module.exports = {
   watch: false,
-  mode: MODE,
+  mode: 'production',
   plugins: [
     new HtmlWebpackPlugin( {
       template: path.join( __dirname, './src/index.pug' ),
       filename: 'index.html',
-      //minify: MODE == 'production' ? true : false, // HTML MINIFY
-      minify: {
-        removeComments: true,
-        //removeEmptyElements: false,
-        //collapseWhitespace: true // minify HTML
-      },
+      minify: true, // HTML MINIFY
       inject: 'body',
       meta: {
         format: { 
@@ -42,7 +35,7 @@ module.exports = {
     new HtmlWebpackTagsPlugin( {
       links: [ { path: 'assets/favicon.ico', attributes: { rel: 'icon' } } ]
     } ),
-    new BeautifyHtmlWebpackPlugin( { 'preserve_newlines': false } ),
+    //new BeautifyHtmlWebpackPlugin( { 'preserve_newlines': false } ),
   ],
   entry: {
     App: [ './src/main.ts', './src/style.less' ],
@@ -52,17 +45,17 @@ module.exports = {
     filename: 'main.js'
   },
   resolve: {
-    extensions: [ '.ts' ], // IMPORTS
+    extensions: [ '.ts', '.js' ], // IMPORTS
   },
   optimization: {
     minimizer: [ new TerserPlugin( ), new CssMinimizerPlugin( ) ],
-    minimize: MODE == 'production' ? true : false // JS & CSS MINIFY
+    minimize: true // JS & CSS MINIFY
   },
   module: {
     rules: [
       {
         test: /\.pug$/,
-        loader: 'pug-loader',
+        loader: 'simple-pug-loader',
         options: { pretty: true },
       },
       {

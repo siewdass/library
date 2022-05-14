@@ -11,7 +11,8 @@ export class Router {
 
   load( page: string = 'home' ) {
     const { paths } = this
-    const { path, template } = paths[ page ]
+    const { path, component } = this.paths[ page ]
+    const { template, style } = new component
     const container = document.querySelector( 'router' )
     container.innerHTML = template
     window.history.pushState( { }, '', path )

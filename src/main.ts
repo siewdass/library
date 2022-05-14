@@ -1,11 +1,10 @@
 import { Router } from './framework/router'
+import { Home, About, Contact } from './app/app'
 
 const paths = {
-  home: { path: '/', template: '<h1>Home</h1>' },
-  about: { path: '/about', template: '<h1>About</h1>' },
-  contact: { path: '/contact', template: '<h1>Contact</h1>' }
+  home: { path: '/', component: Home },
+  about: { path: '/about', component: About },
+  contact: { path: '/contact', component: Contact }
 }
 
 global.router = new Router( paths )
-
-//window.router = new Router( paths )
