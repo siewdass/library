@@ -7,8 +7,8 @@ import { Module } from './framework/module'
 export class API {
 }
 
-@Component( '<p>Home</p>' )
-export class LOGIN {
+@Component( '<p>Login</p>' )
+export class Login {
 }
 
 @Route( '/', '<p>Home</p>' )
@@ -23,7 +23,7 @@ export class About {
 export class Contact {
 }
 
-@Module( { routes: [ Home, About, Contact ], components: [ LOGIN ], services: [ API ] } )
+@Module( { routes: [ Home, About, Contact ], components: [ Login ], services: [ API ] } )
 export class Application {
 }
 
