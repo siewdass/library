@@ -1,10 +1,6 @@
 import { ROUTER } from './framework/router'
 //import { Home, About, Contact } from './app/app'
 
-interface parameters {
-  parameters: any
-}
-
 export function Service( path: any ) {
   return function( target: Function ) {
     //target.prototype.path = path
@@ -45,28 +41,19 @@ export class LOGIN {
 }
 
 @Router( '/', '<p>Home</p>' )
-export class HOME {
-  constructor( ) {
-    //console.log( 'home' )
-  }
+export class Home {
 }
 
 @Router( '/about', '<p>About</p>' )
-export class ABOUT {
-  constructor( ) {
-    //console.log( 'about' )
-  }
+export class About {
 }
 
 @Router( '/contact', '<p>Contact</p>' )
-export class CONTACT {
-  constructor( ) {
-    //console.log( 'contact' )
-  }
+export class Contact {
 }
 
 @Module( {
-  routes: [ HOME, ABOUT, CONTACT ],
+  routes: [ Home, About, Contact ],
   components: [ LOGIN ],
   services: [ API ]
 } )
