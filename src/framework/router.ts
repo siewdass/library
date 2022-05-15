@@ -1,21 +1,24 @@
-export class Router {
+export class ROUTER {
 
-  paths: object
+  routes: any
 
-  constructor( paths  ) {
-    this.paths = paths
-    const { location: { pathname = '/' } } = window
-    const URI = pathname === '/' ? 'home' : pathname.replace( '/', '' )
-    this.load( URI )
+  constructor( routes: any ) {
+    this.routes = routes
+    //const { location: { pathname = '/' } } = window
+    //const URI = pathname === '/' ? 'home' : pathname.replace( '/', '' )
+    this.load( )
   }
 
-  load( page: string = 'home' ) {
-    const { paths } = this
-    const { path, component } = this.paths[ page ]
-    const { template, style } = new component
-    const container = document.querySelector( 'router' )
-    container.innerHTML = template
-    window.history.pushState( { }, '', path )
+  load( PATH: string = '/' ) {
+    const { routes } = this
+    for ( let route in routes ) {
+      const { path, template } = routes[ route ]
+      if ( path == PATH ) {
+        const container = document.querySelector( 'router' )
+        container.innerHTML = template
+        window.history.pushState( { }, '', path )
+      }
+    }
   }
 
 }
