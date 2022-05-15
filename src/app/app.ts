@@ -1,6 +1,6 @@
 import { Component } from '../framework/component'
 
-
+/*
 
 @Component( { template: '<p>Home</p>', style: 'app.less' } )
 export class Home {
@@ -19,3 +19,6 @@ export class About {
 @Component( { template: '<p>Contact</p>', style: 'app.less' } )
 export class Contact {
 }
+
+
+*/
