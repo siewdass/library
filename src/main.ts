@@ -28,3 +28,9 @@ export class Application {
 }
 
 new Application( )
+
+/*
+<nav>
+  <a routerLink="/test">Test</a>
+</nav>
+*/
