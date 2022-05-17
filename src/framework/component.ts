@@ -13,7 +13,7 @@ export function Component( template: string ) {
   return function( target: Function ) {
     target = COMPONENT
     target.prototype.html = template
-    console.log( 'Properties:', Object.getOwnPropertyNames( target.prototype ) )
+    //console.log( 'Properties:', Object.getOwnPropertyNames( target.prototype ) )
     //target.prototype.pug = require( '../app/app.pug' )( )
   }
 }

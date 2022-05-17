@@ -1,24 +1,30 @@
-import { Component } from '../framework/component'
+import { Login } from "../main"
 
-/*
-
-@Component( { template: '<p>Home</p>', style: 'app.less' } )
-export class Home {
-  myvar = 'Hello World'
-  constructor( ) {
-    console.log( this )
-  }
-  func( ) {
+export function View( file: string ) {
+  return function( target: Function ) {
+    target.prototype.template = require( `${file}` )( )
+    /*target.render = ( ) => {
+      console.log( 's' )
+    }*/
   }
 }
 
-@Component( { template: '<p>About</p>', style: 'app.less' } )
-export class About {
+const Serv = ( file: string ) : ClassDecorator => {
+  return target => {
+    //console.log(Reflect.getMetadata('design:paramtypes', target));
+  }
 }
 
-@Component( { template: '<p>Contact</p>', style: 'app.less' } )
-export class Contact {
+function OnEvent( ) {
+  return function( target: any, key: any, descriptor: PropertyDescriptor ) {
+    target( )
+    return descriptor;
+  }
+}
+
+@View( './app.pug' )
+export class App {
+
 }
 
 
-*/
