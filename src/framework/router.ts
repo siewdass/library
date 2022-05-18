@@ -4,3 +4,7 @@ export function Route( path: String ) {
     target.prototype.path = path
   }
 }
+
+export interface Render {
+  render( ): any
+}

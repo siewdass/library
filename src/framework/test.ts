@@ -49,10 +49,6 @@ export const Tester = ( ) => {
   }
 }
 
-export interface Render {
-  render( ): any
-}
-
 
 
 
