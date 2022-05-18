@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-//import { Test, Tester } from './framework/test'
+//import { Core } from './framework/core'
 //import { Component } from './framework/component'
 
 import { ROUTE, render } from './framework/router'
