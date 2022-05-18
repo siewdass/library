@@ -26,7 +26,7 @@ export class Home implements Render {
 
 @Module( {
   routes: [ Home ],
-  views: [ ],
+  views: [ App ],
   components: [ ],
   services: [ API ]
 } )
