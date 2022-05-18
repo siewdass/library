@@ -11,8 +11,9 @@ class COMPONENT extends HTMLElement {
 
 export function Component( template: string ) {
   return function( target: Function ) {
-    target = COMPONENT
-    target.prototype.html = template
+    target.prototype.component = true
+    //target = COMPONENT
+    //target.prototype.html = template
     //console.log( 'Properties:', Object.getOwnPropertyNames( target.prototype ) )
     //target.prototype.pug = require( '../app/app.pug' )( )
   }

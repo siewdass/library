@@ -1,6 +1,6 @@
-export function Route( path: String, template: string ) {
+export function Route( path: String ) {
   return function( target: Function ) {
+    target.prototype.route = true
     target.prototype.path = path
-    target.prototype.template = template
   }
 }
