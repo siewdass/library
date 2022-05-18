@@ -9,6 +9,7 @@ export const getParameters = ( param ) => {
   return c
 }
 
+
 export function Test( constructor: any ) {
   const types = Reflect.getMetadata( 'design:paramtypes', constructor ) 
   const keys = getParameters( constructor )
@@ -49,5 +50,22 @@ export const Tester = ( ) => {
 }
 
 export interface Render {
-  Render( ): any
+  render( ): any
 }
+
+
+
+
+/*
+
+@Component( '<p>Login</p>' )
+export class Login { }
+
+@Route( '/about', '<p>About</p>' )
+export class About { }
+
+@Route( '/contact', '<p>Contact</p>' )
+export class Contact { }
+
+//@Route( '/', '<p>Home</p>' )
+*/

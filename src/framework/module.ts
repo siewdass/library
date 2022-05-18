@@ -24,17 +24,22 @@ export function Module( param: any ) {
   return function( target: Function ) {
     const { routes, components, services } = param
 
-    global.services = {}
-    for ( let s in services ) {
-      const service = new services[ s ]
-      global.services[ service.constructor.name ] = service
-    }
+    /*for ( let s in services ) {
+      if ( services[ s ].prototype.service ) { // ONLY SERVICES
+        const service = new services[ s ]
+        global.services[ service.constructor.name ] = service
+      }
+    }*/
 
-    console.log( 'SERVICES:', global.services )
+    console.log( 'ALL SERVICES:', global.services )
 
     for ( let r in routes ) {
-      const route = new routes[ r ]
-      console.log( route  )
+      //setTimeout( ( ) => {
+        const route = new routes[ r ]( )
+      //}, 1000 ) 
+
+      //console.log( route )
+      
     }
 
     /*for ( let r in routes ) {
@@ -75,3 +80,4 @@ export function Module( param: any ) {
   <a routerLink="/test">Test</a>
 </nav>
 */
+
