@@ -20,16 +20,9 @@ class Router {
 
 }
 
-export function Module( param: any ) {
+export function MODULE( param: any ) {
   return function( target: Function ) {
     const { routes, views, components, services } = param
-
-    /*for ( let s in services ) {
-      if ( services[ s ].prototype.service ) { // ONLY SERVICES
-        const service = new services[ s ]
-        global.services[ service.constructor.name ] = service
-      }
-    }*/
 
     console.log( 'ALL SERVICES:', global.services )
 
