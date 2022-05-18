@@ -11,16 +11,26 @@ export const getParameters = ( param ) => {
 
 export function Test( constructor: any ) {
   const types = Reflect.getMetadata( 'design:paramtypes', constructor ) 
-  const params = getParameters( constructor )
-  let props = { }
+  const keys = getParameters( constructor )
   
   const CONSTRUCTOR: any = function( ...args ) {
     const c = new constructor( args )
-    for ( let i = 0; i < params.length; i++ ) {
-      c[ params[ i ] ] = args[ i ]
-      props[ params[ i ] ] = types[ i ].name
+    for ( let i = 0; i < types.length; i++ ) {
+      const type = types[ i ].name
+      if ( global.services[ type ] ) {
+        c[ keys[ i ] ] = global.services[ type ]
+      } else if ( type == 'Boolean' ) {
+        c[ keys[ i ] ] = false
+      } else if ( type == 'Number' ) {
+        c[ keys[ i ] ] = 0
+      } else if ( type == 'String' ) {
+        c[ keys[ i ] ] = ''
+      } else if ( type == 'Array' ) {
+        c[ keys[ i ] ] = [ ]
+      } else if ( type == 'Object' ) {
+        c[ keys[ i ] ] = { }
+      }
     }
-    c.props = props
     return c
   }
 
@@ -28,36 +38,16 @@ export function Test( constructor: any ) {
   return CONSTRUCTOR
 }
 
-export function Tester( target: Function ) {
-  const types = Reflect.getMetadata( 'design:paramtypes', target ) 
-  //console.log( types )
-}
-
-export function T( ) {
-  return function( constructor: any ) {
-    constructor.prototype.j = '/'
-    const types = Reflect.getMetadata( 'design:paramtypes', constructor ) 
-    const params = getParameters( constructor )
-    let props = { }
-    const CONSTRUCTOR: any = function ( ...args ) {
-      const c = new constructor( args )
-      for ( let i = 0; i < params.length; i++ ) {
-        c[ params[ i ] ] = args[ i ]
-        props[ params[ i ] ] = types[ i ].name
-      }
-      c.props = props
-      return c
+export const Tester = ( ) => {
+  return ( target: any ) => {
+    var f: any = function (...args) {
+      return new target( ...args )
     }
-    CONSTRUCTOR.prototype = constructor.prototype
-    return CONSTRUCTOR
+    f.prototype = target.prototype;
+    return f;
   }
 }
 
 export interface Render {
-  render( ): any
-}
-
-export const Serv = ( param: any ) => {
-  return ( target: any ) => {
-  }
+  Render( ): any
 }

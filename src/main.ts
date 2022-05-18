@@ -3,42 +3,29 @@ import { Component } from './framework/component'
 import { Service } from './framework/service'
 import { Module } from './framework/module'
 import { App } from './app/app'
-import { Test, Tester, Render, T, getParameters } from './framework/test'
+import { Test, Tester, Render } from './framework/test'
 
-@Service( '' )
+@Service( )
 export class API {
+  test = 'ss'
   constructor( ) {
+    this.test = 'lol'
     console.log( 'API STARTED' )
   }
 }
 
 @Component( '<p>Login</p>' )
-export class Login {
-}
+export class Login { }
 
-export const Se = ( ) => {
-  return ( target: any ) => {
-    const keys = getParameters( target )
-    const types = Reflect.getMetadata( 'design:paramtypes', target ) 
-
-    for ( let i = 0; i < keys.length; i++ ) {
-      const key = keys[ i ]
-      const type = types[ i ].name
-      if ( type == 'API' ) {
-        target.prototype[ key ] = global.services
-      }
-    }
-    console.log( 'when' )
-  }
-}
-
-@Se( )
+@Test
 //@Route( '/', '<p>Home</p>' )
-export class Home {
-  private j: String
-  private h: String = 'test'
-  constructor( private s: String, private n: API ) {
-    console.log( 'Home:', this.n )
+export class Home implements Render {
+  constructor( private n: Number, private s: API ) {
+    console.log( 'n:', this.n )
+    console.log( 's:', this.s )
+  }
+  Render( ): API {
+    return this.s
   }
 }
 

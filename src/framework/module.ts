@@ -33,11 +33,10 @@ export function Module( param: any ) {
     console.log( 'SERVICES:', global.services )
 
     for ( let r in routes ) {
-      const t = new routes[ r ]
-      console.log( t )
+      const route = new routes[ r ]
+      console.log( route  )
     }
 
-    // instancedClass instanceof String;
     /*for ( let r in routes ) {
 
       //const { props } = new routes[ r ]
