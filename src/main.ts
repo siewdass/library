@@ -15,7 +15,7 @@ export class Home implements Render {
   api: API
 
   constructor( ) {
-    console.log( 'SERVICE INSTANCE:', this.api )
+    console.log( 'API INSTANCE:', this.api )
   }
   
   render( ) {
