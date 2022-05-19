@@ -3,7 +3,7 @@ import 'reflect-metadata'
 //import { Component } from './framework/component'
 
 import { ROUTE, render } from './framework/router'
-import { service } from './framework/service'
+import { Service, Element } from './framework/service'
 import { MODULE } from './framework/module'
 import { Api } from './api/api'
 import { App } from './app/app'
@@ -11,11 +11,16 @@ import { App } from './app/app'
 @ROUTE( '/' )
 export class Home implements render {
 
-  @service
+  @Element( 'test' ) test: HTMLElement
+
+  @Service
   api: Api
 
   constructor( ) {
-    console.log( 'API INSTANCE:', this.api )
+    setTimeout( ( ) => {
+      console.log( 'API INSTANCE:', this.api )
+      //console.log( this.test )
+    }, 2000 ) 
   }
   
   render( ) {

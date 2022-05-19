@@ -4,8 +4,8 @@ html
     title Webpack with Pug, Less and TypeScript!
   body
     header
-      button( onclick="router.load('/')" ) Home
-      button( onclick="router.load('/about')" ) About
-      button( onclick="router.load('/contact')" ) Contact
-      //button( (click)="func()", [if]="condition" ) {variable}
+      button( [router]='/' ) Home
+      a( [router]='/about' ) About
+      button( [router]='/contact' ) Contact
     router
+    div( id='test' ) test

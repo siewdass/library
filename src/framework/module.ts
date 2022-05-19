@@ -20,11 +20,35 @@ class Router {
 
 }
 
+class DOM {
+  elements: any
+
+  constructor( ) {
+    this.elements = document.getElementsByTagName( '*' )
+    this.routes( )
+  }
+
+  routes( ) {
+    for ( let i = 0; i < this.elements.length; i++ ) {
+      const path = this.elements[ i ].getAttribute( '[router]' )
+      if ( path ) {
+        this.elements[ i ].addEventListener( 'click', ( ) => {
+          console.log( path )
+        } )
+      }
+    }
+  }
+
+}
+
+
 export function MODULE( param: any ) {
   return function( target: Function ) {
     const { routes, views, components, services } = param
 
     console.log( 'ALL SERVICES:', global.services )
+
+    new DOM( )
 
     let ROUTES = [ ]
 
