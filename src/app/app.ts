@@ -1,10 +1,14 @@
-export function View( file: string ) {
-  return function( target: Function ) {
-    target.prototype.template = require( `${file}` )( )
+export function VIEW( pug: string ) {
+  return function( target: any ) {
+    target.prototype.template = require( `${ pug }` )( )
+    target.prototype.view = true
+    if ( !global.views ) { global.views = { } }
+    const view = new target
+    global.views[ view.constructor.name ] = view
   }
 }
 
-@View( './app.pug' )
+@VIEW( './app.pug' )
 export class App {
 }
 

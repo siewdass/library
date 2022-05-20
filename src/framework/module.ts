@@ -41,7 +41,6 @@ class DOM {
 
 }
 
-
 export function MODULE( param: any ) {
   return function( target: Function ) {
     const { routes, views, components, services } = param
@@ -52,11 +51,11 @@ export function MODULE( param: any ) {
 
     let ROUTES = [ ]
 
-    for ( let route in routes ) {
-      const { path, render } = new routes[ route ]
-      const view = render( )
-      const myview = new view( )
-      ROUTES.push( { path, template: myview.template } )      
+    for ( let r in routes ) {
+      const route = new routes[ r ]
+      const path = route.path
+      const view = route.render( )
+      ROUTES.push( { path, template: view.template } )      
     }
 
     global.router = new Router( ROUTES )
